@@ -1,0 +1,38 @@
+{
+  "name": "s4-typescript-api",
+  "version": "1.0.0",
+  "description": "sprint to practice typescript and api fetch",
+  "main": "./lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "lint": "tslint -c tslint.json src/**/*.ts",
+    "prepublish": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dracudev/S4-TypeScript-API.git"
+  },
+  "keywords": [
+    "typescript",
+    "API"
+  ],
+  "author": {
+    "name": "Javier Andreu,",
+    "email": "andreujavier99@gmail.com"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dracudev/S4-TypeScript-API/issues"
+  },
+  "homepage": "https://github.com/dracudev/S4-TypeScript-API#readme",
+  "devDependencies": {
+    "tslint": "^5.20.1",
+    "typescript": "^5.6.3"
+  },
+  "files": [
+    "./bin/*",
+    "./lib/*"
+  ],
+  "typings": "./lib/index.d.ts"
+}
