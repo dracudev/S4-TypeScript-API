@@ -9,36 +9,57 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 document.addEventListener("DOMContentLoaded", () => {
-    function fetchDadJoke() {
+    function fetchJokes() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const response = yield fetch("https://icanhazdadjoke.com/", {
-                    method: "GET",
-                    headers: {
-                        "Accept": "application/json",
-                    },
-                });
-                if (!response.ok) {
-                    throw new Error(`Error en la solicitud: ${response.status}`);
-                }
-                const data = yield response.json();
-                return data;
+                const [joke1, joke2, joke3] = yield Promise.all([
+                    fetch("https://icanhazdadjoke.com/", {
+                        method: "GET",
+                        headers: {
+                            "Accept": "application/json",
+                        },
+                    }).then((response) => {
+                        if (!response.ok) {
+                            throw new Error("Error fetching dad joke.");
+                        }
+                        return response.json();
+                    }),
+                    fetch("https://api.chucknorris.io/jokes/random", {
+                        method: "GET",
+                    }).then((response) => {
+                        if (!response.ok) {
+                            throw new Error("Error fetching norris joke.");
+                        }
+                        return response.json();
+                    }),
+                    fetch("https://v2.jokeapi.dev/joke/Any?type=single", {
+                        method: "GET",
+                    }).then((response) => {
+                        if (!response.ok) {
+                            throw new Error("Error fetching black joke.");
+                        }
+                        return response.json();
+                    }),
+                ]);
+                return [joke1.joke, joke2.value, joke3.joke];
             }
             catch (error) {
-                console.error("Error fetching joke:", error);
-                return null;
+                console.error("Error fetching jokes:", error);
+                return [];
             }
         });
     }
     const button1 = document.querySelector(".joke-button");
     const jokeContainer = document.querySelector(".container-joke");
-    fetchDadJoke().then((joke) => {
-        if (joke) {
-            displayJoke(joke.joke);
-            reportJokes(joke.joke);
+    fetchJokes().then((jokes) => {
+        if (jokes[0] && jokes[1] && jokes[2]) {
+            let randomJoke = jokes[Math.floor(Math.random() * jokes.length)];
+            console.log(jokes[2]);
+            displayJoke(randomJoke);
+            reportJokes(randomJoke);
         }
         else {
-            console.log("Error fetching joke.");
+            console.log("Error fetching jokes.");
         }
     });
     function displayJoke(jokeText) {
@@ -51,10 +72,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     button1 === null || button1 === void 0 ? void 0 : button1.addEventListener("click", (e) => __awaiter(void 0, void 0, void 0, function* () {
         e.preventDefault();
-        const joke = yield fetchDadJoke();
-        if (joke) {
-            displayJoke(joke.joke);
-            reportJokes(joke.joke);
+        const jokes = yield fetchJokes();
+        if (jokes[0] && jokes[1] && jokes[2]) {
+            let randomJoke = jokes[Math.floor(Math.random() * jokes.length)];
+            displayJoke(randomJoke);
+            reportJokes(randomJoke);
         }
     }));
     const badButton = document.querySelector(".bad-button");
@@ -115,9 +137,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     fetchWeather().then((data) => {
         if (data) {
-            console.log("Weather Condition:", data.weather[0].main);
-            console.log("Temperature:", data.main.temp);
-            console.log("Icon:", data.weather[0].icon);
             displayWeather(data.weather[0].main, data.main.temp, data.weather[0].icon);
         }
         else {

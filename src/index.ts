@@ -1,41 +1,57 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-interface DadJoke {
-  id: string;
-  joke: string;
-  status: number;
-}
-
-async function fetchDadJoke(): Promise<DadJoke | null> {
+async function fetchJokes(): Promise<(string)[]> {
   try {
-    const response = await fetch("https://icanhazdadjoke.com/", {
-      method: "GET",
-      headers: {
-        "Accept": "application/json",
-      },
-    });
+    const [joke1, joke2, joke3] = await Promise.all([
+      fetch("https://icanhazdadjoke.com/", {
+        method: "GET",
+        headers: {
+          "Accept": "application/json",
+        },
+      }).then((response) => {
+        if (!response.ok) {
+          throw new Error("Error fetching dad joke.");
+        }
+        return response.json();
+      }),
 
-    if (!response.ok) {
-      throw new Error(`Error en la solicitud: ${response.status}`);
-    }
+      fetch("https://api.chucknorris.io/jokes/random", {
+        method: "GET",
+      }).then((response) => {
+        if (!response.ok) {
+          throw new Error("Error fetching norris joke.");
+        }
+        return response.json();
+      }),
 
-    const data: DadJoke = await response.json();
-    return data;
+      fetch("https://v2.jokeapi.dev/joke/Any?type=single", {
+        method: "GET",
+      }).then((response) => {
+        if (!response.ok) {
+          throw new Error("Error fetching black joke.");
+        }
+        return response.json();
+      }),
+    ]);
+
+    return [joke1.joke, joke2.value, joke3.joke];
   } catch (error) {
-    console.error("Error fetching joke:", error);
-    return null;
+    console.error("Error fetching jokes:", error);
+    return [];
   }
 }
 
 const button1 = document.querySelector(".joke-button");
 const jokeContainer = document.querySelector(".container-joke");
 
-fetchDadJoke().then((joke) => {
-  if (joke) {
-    displayJoke(joke.joke);
-    reportJokes(joke.joke);
+fetchJokes().then((jokes) => {
+  if (jokes[0] && jokes[1] && jokes[2]) {
+    let randomJoke = jokes[Math.floor(Math.random() * jokes.length)]
+    console.log(jokes[2]);
+    displayJoke(randomJoke);
+    reportJokes(randomJoke);
   } else {
-    console.log("Error fetching joke.");
+    console.log("Error fetching jokes.");
   }
 });
 
@@ -51,10 +67,11 @@ function displayJoke(jokeText: string) {
 
 button1?.addEventListener("click", async (e) => {
   e.preventDefault();
-  const joke = await fetchDadJoke();
-  if (joke) {
-    displayJoke(joke.joke);
-    reportJokes(joke.joke);
+  const jokes = await fetchJokes();
+  if (jokes[0] && jokes[1] && jokes[2]) {
+    let randomJoke = jokes[Math.floor(Math.random() * jokes.length)]
+    displayJoke(randomJoke);
+    reportJokes(randomJoke);
   }
 });
 
@@ -140,9 +157,6 @@ async function fetchWeather(): Promise<weatherInfo | null> {
 
 fetchWeather().then((data) => {
   if (data) {
-    console.log("Weather Condition:", data.weather[0].main);
-    console.log("Temperature:", data.main.temp);
-    console.log("Icon:", data.weather[0].icon);
     displayWeather(data.weather[0].main, data.main.temp, data.weather[0].icon)
   }
   else {
