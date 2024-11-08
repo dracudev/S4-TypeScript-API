@@ -1,3 +1,5 @@
+document.addEventListener("DOMContentLoaded", () => {
+
 interface DadJoke {
   id: string;
   joke: string;
@@ -25,12 +27,13 @@ async function fetchDadJoke(): Promise<DadJoke | null> {
   }
 }
 
-const button = document.querySelector(".joke-button");
+const button1 = document.querySelector(".joke-button");
 const jokeContainer = document.querySelector(".container-joke");
 
 fetchDadJoke().then((joke) => {
   if (joke) {
     displayJoke(joke.joke);
+    reportJokes(joke.joke);
   } else {
     console.log("Error fetching joke.");
   }
@@ -46,10 +49,59 @@ function displayJoke(jokeText: string) {
   jokeContainer?.appendChild(jokeDiv);
 }
 
-button?.addEventListener("click", async (e) => {
+button1?.addEventListener("click", async (e) => {
   e.preventDefault();
   const joke = await fetchDadJoke();
   if (joke) {
     displayJoke(joke.joke);
+    reportJokes(joke.joke);
   }
 });
+
+const badButton = document.querySelector(".bad-button");
+const neutralButton = document.querySelector(".neutral-button");
+const goodButton = document.querySelector(".good-button");
+
+interface jokeReport{
+  joke: string,
+  score: number,
+  date: string
+}
+let jokeInfo: jokeReport[] = [];
+
+function reportJokes(jokeText: string) {
+  let newReport = {
+    joke: jokeText,
+    score: 0,
+    date: new Date().toISOString()
+  }
+
+  jokeInfo.push(newReport);
+  console.log(jokeInfo)
+}
+
+badButton?.addEventListener("click", (e) => {
+  e.preventDefault();
+  if (jokeInfo.length > 0) {
+    jokeInfo[jokeInfo.length - 1].score = 1;
+    console.log(jokeInfo)
+  }
+})
+
+neutralButton?.addEventListener("click", (e) => {
+  e.preventDefault();
+  if (jokeInfo.length > 0) {
+    jokeInfo[jokeInfo.length - 1].score = 2;
+    console.log(jokeInfo)
+  }
+})
+
+goodButton?.addEventListener("click", (e) => {
+  e.preventDefault();
+  if (jokeInfo.length > 0) {
+    jokeInfo[jokeInfo.length - 1].score = 3;
+    console.log(jokeInfo)
+  }
+})
+
+})
