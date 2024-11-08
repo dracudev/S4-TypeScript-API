@@ -9,8 +9,11 @@
 </head>
 <body>
 
-    <div id="weather-container">
-        <p>🌧️ | 21ºC</p>
+    <div id="weather-container" class="d-flex align-items-center justify-content-center">
+        <p class="condition"></p>
+        <img class="condition-image w-25 m-0" src="https://openweather.site/img/wn/{weather.icon}.png" alt="">
+        <p class="mx-2"> | </p>
+        <p class="temp ms-2"></p>
     </div>
 
     <section class="d-flex align-items-center justify-content-center h-100">
