@@ -47,7 +47,6 @@ const jokeContainer = document.querySelector(".container-joke");
 fetchJokes().then((jokes) => {
   if (jokes[0] && jokes[1] && jokes[2]) {
     let randomJoke = jokes[Math.floor(Math.random() * jokes.length)]
-    console.log(jokes[2]);
     displayJoke(randomJoke);
     reportJokes(randomJoke);
   } else {
@@ -172,13 +171,13 @@ function displayWeather(condition: string, temp: number, image: string) {
   if (conditionImage){
     (conditionImage as HTMLImageElement).src = `https://openweather.site/img/wn/${image}.png`;
   }
-
   if (!conditionImage && conditionText) {
     conditionText.textContent = condition;
   }
   if (tempText) {
     tempText.textContent = ((temp - 32) * 5 / 9).toFixed(1).toString() + " ºC";
   }
+
 }
 
 })

@@ -1,10 +1,12 @@
 body {
-    background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(99, 91, 116, 0.863)), url(../img/background.webp);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
+    background-color: rgb(168, 211, 193);
     height: 100vh;
     margin: 0;
+    box-sizing: border-box;
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-image: url("data:image/svg+xml;utf8,%3Csvg viewBox=%220 0 1000 1000%22 xmlns=%22http:%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cdefs%3E%3CclipPath id=%22a%22%3E%3Cpath fill=%22currentColor%22 d=%22M906.5 660.5Q882 821 726.5 861t-298 24.5Q286 870 194 757.5t-107-263Q72 344 163 209T412.5 86q158.5 12 292 71t180 201q46.5 142 22 302.5Z%22%2F%3E%3C%2FclipPath%3E%3C%2Fdefs%3E%3Cg clip-path=%22url(%23a)%22%3E%3Cpath fill=%22%235d5372%22 d=%22M906.5 660.5Q882 821 726.5 861t-298 24.5Q286 870 194 757.5t-107-263Q72 344 163 209T412.5 86q158.5 12 292 71t180 201q46.5 142 22 302.5Z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
 }
 
 .joke-button {
@@ -23,4 +25,9 @@ body {
     font-size: 2rem;
     color: white;
     z-index: 10;
+}
+
+.container-text {
+    max-width: 50%;
+    max-height: 50%;
 }

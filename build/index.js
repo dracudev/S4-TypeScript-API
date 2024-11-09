@@ -54,7 +54,6 @@ document.addEventListener("DOMContentLoaded", () => {
     fetchJokes().then((jokes) => {
         if (jokes[0] && jokes[1] && jokes[2]) {
             let randomJoke = jokes[Math.floor(Math.random() * jokes.length)];
-            console.log(jokes[2]);
             displayJoke(randomJoke);
             reportJokes(randomJoke);
         }

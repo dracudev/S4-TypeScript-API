@@ -10,25 +10,22 @@
 <body>
 
     <div id="weather-container" class="d-flex align-items-center justify-content-center">
-        <p class="condition"></p>
+        <p class="condition">☀</p>
         <img class="condition-image w-25 m-0" src="https://openweather.site/img/wn/{weather.icon}.png" alt="">
         <p class="mx-2"> | </p>
-        <p class="temp ms-2"></p>
+        <p class="temp ms-2">20ºC</p>
     </div>
 
     <section class="d-flex align-items-center justify-content-center h-100">
-        <div>
-            <div class="container text-center bg-light p-4 border rounded-3 shadow">
-                <h3 class="mb-4 p-4">Ready to laugh? 🤣</h3>
-                <div class="container-joke p-4"></div>
+        <div class="container-text text-center border border-white w-50 text-white">
+                <h3 class="mb-4">Ready to laugh? 🤣</h3>
+                <div class="container-joke mb-4 fs-5"></div>
                 <div class="container">
-                    <button class="btn btn-primary bad-button m-4">Bad</button>
-                    <button class="btn btn-primary neutral-button m-4">Neutral</button>
-                    <button class="btn btn-primary good-button m-4">Good</button>
+                    <button class="btn bad-button mx-4 fs-1">☹</button>
+                    <button class="btn neutral-button mx-4 fs-1">😐</button>
+                    <button class="btn good-button mx-4 fs-1">🙂</button>
                 </div>
                 <button class="btn btn-primary btn-lg joke-button m-4">Next joke</button>
-
-            </div>
         </div>
     </section>
 
