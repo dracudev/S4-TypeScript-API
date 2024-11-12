@@ -136,24 +136,23 @@ goodButton?.addEventListener("click", (e) => {
 })
 
 interface weatherInfo {
-  weather: [
-    {
-      main: string;
+  current: {
+    temp_c: number;
+    condition: {
+      text: string;
       icon: string;
-    }
-  ];
-  main: {
-    temp: number;
+    };
   };
 }
 
+
 async function fetchWeather(): Promise<weatherInfo | null> {
   try {
-    const response = await fetch("https://open-weather13.p.rapidapi.com/city/barcelona/EN", {
+    const response = await fetch('https://weatherapi-com.p.rapidapi.com/current.json?q=Barcelona', {
       method: "GET",
       headers: {
         'x-rapidapi-key': '9b14e42508msh10571fa889ce0d8p134076jsn97763d7d4fd0',
-		    'x-rapidapi-host': 'open-weather13.p.rapidapi.com'
+        'x-rapidapi-host': 'weatherapi-com.p.rapidapi.com'
       },
     });
 
@@ -171,7 +170,7 @@ async function fetchWeather(): Promise<weatherInfo | null> {
 
 fetchWeather().then((data) => {
   if (data) {
-    displayWeather(data.weather[0].main, data.main.temp, data.weather[0].icon)
+    displayWeather(data.current.condition.text, data.current.temp_c, data.current.condition.icon);
   }
   else {
     console.log("Error fetching weather.");
@@ -184,13 +183,13 @@ function displayWeather(condition: string, temp: number, image: string) {
   let conditionImage = document.querySelector(".condition-image");
 
   if (conditionImage){
-    (conditionImage as HTMLImageElement).src = `https://openweather.site/img/wn/${image}.png`;
+    (conditionImage as HTMLImageElement).src = image;
   }
   if (!conditionImage && conditionText) {
     conditionText.textContent = condition;
   }
   if (tempText) {
-    tempText.textContent = ((temp - 32) * 5 / 9).toFixed(1).toString() + " ºC";
+    tempText.textContent = temp.toFixed(1).toString() + " ºC";
   }
 
 }
