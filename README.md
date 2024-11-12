@@ -46,8 +46,8 @@ This project focuses on building a web application that displays jokes to employ
 
 ## 📋 Requirements
 
-- **Node.js** or higher
-- **TypeScript** installed
+- **Node.js**
+- **TypeScript**
 - **Fetch API** (or equivalent for making API calls)
 
 <br>
