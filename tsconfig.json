@@ -35,5 +35,5 @@
 	"include": [
 		"typings/**/*",
 		"src/**/*"
-	]
+, "index.ts"	]
 }
