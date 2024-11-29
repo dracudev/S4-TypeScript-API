@@ -15,7 +15,7 @@ This project focuses on building a web application that displays jokes to employ
 
 ## 📐 Project Structure
 
-### Level 1
+### ⭐ Level 1
 
 - **Exercise 1**: Implement the main screen that shows a joke when the user starts the app. The joke will be fetched from the "Random dad joke" API. Display the joke on the screen and log it in the console.
 
@@ -23,13 +23,13 @@ This project focuses on building a web application that displays jokes to employ
 
 - **Exercise 3**: Implement an array `reportJokes` to track user feedback for each joke. Each entry should include the joke, a score (1 to 3), and the date of the interaction in ISO format. Provide three buttons to rate the joke: 1, 2, or 3. If no rating is given, the user can move to the next joke.
 
-### Level 2
+### ⭐⭐ Level 2
 
 - **Exercise 4**: Integrate a weather API to display the current weather at the start of the application. This adds contextual information for users to enjoy before viewing the jokes.
 
 - **Exercise 5**: Enhance the joke app by fetching jokes from multiple APIs. The jokes should be displayed randomly, alternating between jokes from different sources to keep the content fresh.
 
-### Level 3
+### ⭐⭐⭐ Level 3
 
 - **Exercise 6**: Create a responsive layout for the web app. The design should be mobile-friendly and well-structured to improve the user experience.
 
